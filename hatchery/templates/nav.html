@@ -1,0 +1,29 @@
+
+{% load static %}
+<div class="nav">
+<nav class="nav-container">
+    <ul class="nav-links">
+        <li><a href="{% url 'landing page' %}" class="{% if request.resolver_match.url_name == 'landing page' %}active{% endif %}">Home</a></li>
+        <li><a href="{% url 'space-list' %}" class="{% if request.resolver_match.url_name == 'space-list' or 'space' in request.resolver_match.url_name %}active{% endif %}">Spaces</a></li>
+        <li><a href="{% url 'machine_list' %}" class="{% if 'machine' in request.resolver_match.url_name %}active{% endif %}">Machines</a></li>
+        {% if user.is_authenticated %}
+            {% if user.is_superuser or user.is_staff %}
+                <li><a href="{% url 'schedule-list' %}" class="{% if 'schedule' in request.resolver_match.url_name %}active{% endif %}">Schedule</a></li>
+            {% else %}
+                {% if user.person %}
+                {% if user.person.role == "Staff" %}
+                    <li><a href="{% url 'schedule-list' %}" class="{% if 'schedule' in request.resolver_match.url_name %}active{% endif %}">Schedule</a></li>
+                {% endif %}
+                {% endif %}
+            {% endif %}
+            {% endif %}
+        <li><a href="{% url 'trainer_list' %}" class="{% if 'trainer' in request.resolver_match.url_name %}active{% endif %}">Trainers</a></li>
+        <!-- {% if request.resolver_match.url_name == 'machine_list' %}
+            <li><a href="{% url 'machine_create' %}">Add New Machine</a></li>
+        {% endif %} -->
+    </ul>
+    <div class="nav-auth">
+        {% include 'auth_buttons.html' %}
+    </div>
+</nav>
+</div>

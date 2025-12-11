@@ -1,0 +1,10 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+<footer class="footer">
+    <div class="footer-content">
+        <a href="{% url 'help-ticket-list' %}">Help</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'contact-list' %}">Contact</a>
+    </div>
+</footer>

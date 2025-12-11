@@ -1,0 +1,36 @@
+{% load socialaccount %}
+
+<style>
+.google-signin-btn {
+    background-color: white !important;
+    border: 2px solid #5e48ad !important;
+    color: #5e48ad !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.google-signin-btn:hover {
+    background-color: #5e48ad !important;
+    border-color: #5e48ad !important;
+    color: white !important;
+}
+</style>
+
+<div class="auth-buttons">
+    {% if user.is_authenticated %}
+        <span class="user-info">Welcome, {{ user.person.first_name }} {{ user.person.last_name }}</span>
+        {% if user.person %}
+            <span> ({{ user.person.role }}) </span>
+        {% elif user.is_superuser%}
+            <span class="user-info">{{ user.username }} </span>
+            <span> (Django Admin) </span>
+        {% else %}
+            <span>No Person Record</span>
+        {% endif %}
+        <a href="{% url 'account_logout' %}" class="btn btn-outline-danger">Logout</a>
+    {% else %}
+        <a href="{% provider_login_url 'google' %}" class="btn google-signin-btn">
+            Sign in with Google
+        </a>
+    {% endif %}
+</div>

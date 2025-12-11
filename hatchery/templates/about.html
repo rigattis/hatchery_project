@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/spaces_list.css' %}">
+<style>
+  .about-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    text-align: center;
+  }
+
+  .about-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2C4949;
+    margin-bottom: 30px;
+  }
+
+  .schedule-info {
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+
+  .schedule-section {
+    margin-bottom: 20px;
+  }
+
+  .schedule-label {
+    font-weight: 600;
+    color: #2C4949;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .schedule-value {
+    color: #5E48AD;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .days-schedule {
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .day-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    align-items: center;
+  }
+
+  .day-row:last-child {
+    border-bottom: none;
+  }
+
+  .day-name {
+    font-weight: 600;
+    color: #2C4949;
+    font-size: 1rem;
+    min-width: 100px;
+  }
+
+  .day-hours {
+    color: #5E48AD;
+    font-size: 1rem;
+    text-align: right;
+  }
+
+  .day-hours.closed {
+    color: #999;
+    font-style: italic;
+  }
+
+  .tbd-message {
+    color: #2C4949;
+    font-size: 1.3rem;
+    font-style: italic;
+    padding: 40px;
+  }
+
+  .about-description {
+    color: #2C4949;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+  }
+
+  .scrollable-container {
+    overflow-x: auto;
+    padding: 20px 0;
+    margin: 0 -20px;
+  }
+
+  .tiles-row {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+    min-width: min-content;
+  }
+
+  .tile {
+    flex: 0 0 300px;
+    background: white;
+    border: 2px solid #2C4949;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(44, 73, 73, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(44, 73, 73, 0.2);
+  }
+
+  .tile-image {
+    width: 100%;
+    height: 180px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .tile-image .placeholder {
+    font-size: 3rem;
+    color: #5E48AD;
+  }
+
+  .tile-title {
+    color: #2C4949;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .tile-meta {
+    color: #5E48AD;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .tile-description {
+    color: #5a5a5a;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .tile-date {
+    color: #999;
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .no-items {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 40px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="about-container">
+  <h1 class="about-title">About the Hatchery</h1>
+
+  
+
+  <div class="schedule-info">
+    <h2 style="color: #2C4949; margin-bottom: 20px;">Current Schedule</h2>
+
+    {% if schedule_days %}
+      <div class="schedule-section">
+        <div class="schedule-label">Hours</div>
+        <div class="days-schedule">
+          {% for day_info in schedule_days %}
+            <div class="day-row">
+              <span class="day-name">{{ day_info.day }}</span>
+              <span class="day-hours {% if not day_info.open %}closed{% endif %}">{{ day_info.hours }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% if active_schedules %}
+      <div class="schedule-section">
+        <div class="schedule-label">Active Schedules</div>
+        {% for schedule in active_schedules %}
+          <div class="schedule-value">
+            {{ schedule.name }} ({{ schedule.start_date }} to {{ schedule.end_date }})
+          </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    {% else %}
+      <div class="tbd-message">
+        Schedule To Be Determined
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="about-container">
+  <h1 class="about-title">Project Showcase</h1>
+
+  <p class="about-description">
+    Check out some of the awesome projects students in the hatchery have been working on!
+  </p>
+
+  {% if projects %}
+    <div class="scrollable-container">
+      <div class="tiles-row">
+        {% for project in projects %}
+          <div class="tile">
+            <div class="tile-image">
+              {% if project.image %}
+                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+              {% else %}
+                <div class="placeholder">🎨</div>
+              {% endif %}
+            </div>
+            <div class="tile-title">{{ project.title }}</div>
+            <div class="tile-meta">by {{ project.student_name }}</div>
+            <div class="tile-description">{{ project.description }}</div>
+            <div class="tile-date">Completed: {{ project.date_completed|date:"M d, Y" }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% else %}
+    <div class="no-items">No projects to showcase at this time.</div>
+  {% endif %}
+</div>
+
+<div class="about-container">
+  <h1 class="about-title">Current and Upcoming Events</h1>
+
+  <p class="about-description">
+    Join us for exciting events at the Hatchery!
+  </p>
+
+  {% if events %}
+    <div class="scrollable-container">
+      <div class="tiles-row">
+        {% for event in events %}
+          <div class="tile">
+            <div class="tile-image">
+              {% if event.image %}
+                <img src="{{ event.image.url }}" alt="{{ event.title }}">
+              {% else %}
+                <div class="placeholder">📅</div>
+              {% endif %}
+            </div>
+            <div class="tile-title">{{ event.title }}</div>
+            <div class="tile-meta">{{ event.location }}</div>
+            <div class="tile-description">{{ event.description }}</div>
+            <div class="tile-date">{{ event.event_date|date:"M d, Y" }} at {{ event.event_time|time:"g:i A" }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% else %}
+    <div class="no-items">No upcoming events at this time.</div>
+  {% endif %}
+</div>
+{% endblock %}
+
+

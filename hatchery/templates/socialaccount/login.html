@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load allauth %}
+
+{% block head %}
+{{ block.super }}
+<style>
+  .auth-container {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background-color: #fff;
+  }
+
+  .auth-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(44, 73, 73, 0.12);
+    padding: 45px 40px;
+    max-width: 500px;
+    width: 100%;
+    border: 2px solid #2C4949;
+    text-align: center;
+  }
+
+  .auth-logo {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+
+  .auth-card h1 {
+    color: #2C4949;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  .auth-card p {
+    color: #4c3c91;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+  }
+
+  .auth-card button[type="submit"] {
+    width: 100%;
+    background: #4285F4;
+    color: white;
+    border: 2px solid #4285F4;
+    border-radius: 50px;
+    padding: 14px 35px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .auth-card button[type="submit"]:hover {
+    background: #357ae8;
+    border-color: #357ae8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(66, 133, 244, 0.4);
+  }
+
+  .provider-icon {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 1.2rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-logo">🐣</div>
+
+    {% if process == "connect" %}
+      <h1>
+        {% blocktrans with provider.name as provider %}Connect {{ provider }}{% endblocktrans %}
+      </h1>
+      <p>
+        {% blocktrans with provider.name as provider %}You are about to connect a new third-party account from {{ provider }}.{% endblocktrans %}
+      </p>
+    {% else %}
+      <h1>
+        {% blocktrans with provider.name as provider %}Sign In Via {{ provider }}{% endblocktrans %}
+      </h1>
+      <p>
+        {% blocktrans with provider.name as provider %}You are about to sign in using a third-party account from {{ provider }}.{% endblocktrans %}
+      </p>
+    {% endif %}
+
+    {% element form method="post" no_visible_fields=True %}
+      {% slot actions %}
+        {% csrf_token %}
+        {% element button type="submit" %}
+          <span class="provider-icon">🔐</span>
+          {% trans "Continue" %}
+        {% endelement %}
+      {% endslot %}
+    {% endelement %}
+  </div>
+</div>
+{% endblock %}

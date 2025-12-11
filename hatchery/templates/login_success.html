@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+<div class="container mt-3">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="landing-page">
+  <h1 class="page-title">Hatchery: Spaces and Machines</h1>
+
+  <div class="hero-video-container">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="{% static 'video/final-hero-vid-compressed.mp4' %}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+{% if user.is_authenticated %}
+<div class="reservation-section">
+  <h1 class="page-title">    </h1>
+  <h2>My Reservations</h2>
+
+  {% if reservations %}
+    <div class="reservation-list">
+      {% for instance in reservations %}
+<div class="reservation-container">
+  <div class="reservation-details">
+    <h3>{{ instance.reservation_title }}</h3>
+    <h4>{{ instance.date }}: {{ instance.start_time }} - {{ instance.end_time }}</h4>
+    <p>
+      Space: {{ instance.space|default:"N/A" }}, 
+      Machine: {{ instance.machine|default:"N/A" }},
+      Trainer: {{ instance.trainer|default:"N/A" }}
+    </p>
+  </div>
+
+  <!-- Edit Button  -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editReservationModal{{ instance.id }}">
+    Edit
+  </button>
+  <!-- Delete button  -->
+
+  <h1 class="page-title"> </h1>
+
+  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal{{ instance.id }}">
+    Delete
+  </button>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal{{ instance.id }}" tabindex="-1" aria-labelledby="deleteConfirmModalLabel{{ instance.id }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmModalLabel{{ instance.id }}">Confirm Deletion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete <strong>{{ instance.reservation_title }}</strong>? This action cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form action="{% url 'delete_reservation' instance.id %}" method="POST" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Reservation Modal -->
+<div class="modal fade" id="editReservationModal{{ instance.id }}" tabindex="-1" aria-labelledby="editReservationModalLabel{{ instance.id }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="POST" action="{% url 'edit_reservation' instance.id %}" id="editReservationForm{{ instance.id }}">
+        {% csrf_token %}
+        <input type="hidden" name="reservation_id" value="{{ instance.id }}">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editReservationModalLabel{{ instance.id }}">Edit Reservation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="edit_reservation_title_{{ instance.id }}" class="form-label">Reservation title</label>
+            <input type="text" class="form-control" id="edit_reservation_title_{{ instance.id }}" name="reservation_title" value="{{ instance.reservation_title }}" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="edit_date_{{ instance.id }}" class="form-label">Date</label>
+            <input type="date" class="form-control" id="edit_date_{{ instance.id }}" name="date" value="{{ instance.date|date:'Y-m-d' }}" required>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="edit_start_time_{{ instance.id }}" class="form-label">Start time</label>
+              <input type="time" class="form-control" id="edit_start_time_{{ instance.id }}" name="start_time" value="{{ instance.start_time|time:'H:i' }}" required>
+            </div>
+            <div class="col">
+              <label for="edit_end_time_{{ instance.id }}" class="form-label">End time</label>
+              <input type="time" class="form-control" id="edit_end_time_{{ instance.id }}" name="end_time" value="{{ instance.end_time|time:'H:i' }}" required>
+            </div>
+          </div>
+
+          <div class="mb-3 mt-3">
+            <label for="edit_notes_{{ instance.id }}" class="form-label">Notes</label>
+            <textarea class="form-control" id="edit_notes_{{ instance.id }}" name="notes" rows="3">{{ instance.notes }}</textarea>
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <h1 class="page-title">  </h1>
+      </form>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+</div>
+  {% else %}
+    <p>No reservations yet.</p>
+  {% endif %}
+
+<h1 class="page-title">  </h1>
+</div>
+  <div id="calendar"></div>
+</div>
+{% endif %}
+</div> 
+
+{% block scripts %}
+{% if user.is_authenticated %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const calendarEl = document.getElementById("calendar");
+
+    const calendarHeight = Math.max(600, Math.floor(window.innerHeight * 0.65));
+
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: "timeGridWeek",
+      slotMinTime: "08:00:00",
+      slotMaxTime: "22:00:00",
+      height: calendarHeight,
+      expandRows: true,
+      headerToolbar: {
+        left: "prev,next today",
+        center: "title",
+        right: "timeGridWeek,timeGridDay"
+      },
+      nowIndicator: true,
+
+      // 🔹 Fetch only this user's reservations
+      events: `/reservations/my/`,
+
+      eventDataTransform: (data) => ({
+        id: data.id,
+        title: data.reservation_title,
+        start: data.date + "T" + data.start_time,
+        end: data.date + "T" + data.end_time,
+        extendedProps: {
+          space: data.space__title,
+          machine: data.machine__name,
+          trainer: data.trainer__name,
+          status: data.status
+        }
+      }),
+    });
+
+    calendar.render();
+
+    requestAnimationFrame(() => calendar.updateSize());
+
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const newHeight = Math.max(500, Math.floor(window.innerHeight * 0.6));
+        calendar.setOption('height', newHeight);
+        calendar.updateSize();
+      }, 150);
+    });
+  });
+</script>
+</div>
+<h1 class="page-title">  </h1>
+{% endif %}
+{% endblock %}
+{% endblock %}
