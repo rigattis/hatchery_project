@@ -1,0 +1,66 @@
+:root {
+    --bs-primary: #2C4949;  /*this change the boxes */
+    --bs-secondary: #fff; 
+    --bs-success: #2C4949;   
+    --bs-info: #2C4949;
+    --bs-warning: #2C4949;   
+  }
+
+
+  body {
+    background-color: var(--bs-secondary)!important;
+    color: #4c3c91; /* this changes the color of the footer things */
+  }
+
+  a {
+  color: #5E48AD !important; /* your purple  this to change the links */
+  text-decoration: none; 
+  }
+
+  .nav {
+    background-color: #FBD7CB;
+  }
+
+  .modal-content {
+    border-radius: 16px;
+    border: 3px solid var(--bs-primary);
+  }
+
+  .btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+  }
+
+  .btn-primary:hover {
+    background-color: #4c3c91;
+    border-color: #4c3c91;
+  }
+
+  .btn-secondary {
+    background-color: var(--bs-warning);
+    border-color: var(--bs-warning);
+    color: #000;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* full viewport height */
+}
+
+.content {
+    flex: 1; /* takes all remaining space, pushing footer down */
+}
+
+/* optional: style footer */
+footer {
+    background-color: #2C2C2C;
+    color: white;
+    padding: 16px;
+    text-align: center;
+}

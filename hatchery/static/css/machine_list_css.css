@@ -1,0 +1,112 @@
+.machine-container {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 20px;
+  background-color: #fff;
+  font-family: "Roboto", sans-serif;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background-color: #fff;
+  border: 2px solid #2C4949;
+  border-radius: 10px;
+  align-self: start;
+}
+
+.machines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.machine-tile {
+  background: white;
+  border: 2px solid #2C4949;
+  border-radius: 16px;
+  padding: 25px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(44, 73, 73, 0.1);
+  cursor: pointer;
+}
+
+.machine-tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(44, 73, 73, 0.2);
+  border-color: #4c3c91;
+  background: #FBD7CB;
+}
+
+.machine-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.machine-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.machine-info {
+  text-align: center;
+  width: 100%;
+}
+
+.machine-name {
+  color: #2C4949;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.machine-category {
+  color: #4c3c91;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.machine-location {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.modal-body #id_location_choices {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;               /* space between checkbox and text */
+  margin-bottom: 8px; 
+  color: black ;
+}
+
+.modal-body #id_location {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;               /* space between checkbox and text */
+  margin-bottom: 8px; 
+  color: black ;
+}

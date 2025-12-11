@@ -1,0 +1,373 @@
+/* Container */
+.detail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 32px; /* more padding around page */
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px; /* base font size for all content */
+}
+
+/* Back button at the top */
+.back-button {
+  width: 95%;
+  max-width: 1000px;
+  margin-bottom: 24px;
+}
+
+.back-button .btn-back {
+  background: #D6D957;
+  color: #2C4949;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 12px 20px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  font-size: 18px; /* bigger text */
+  transition: background 0.3s;
+}
+
+.back-button .btn-back:hover {
+  background: #c1c54e;
+}
+
+/* Space card */
+.space_card {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  max-width: 1000px; /* wider card */
+  background: #fff;
+  border-radius: 20px;
+  border: 3px solid transparent;
+  padding: 40px; /* more inner space */
+  margin-bottom: 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* subtle lift */
+}
+
+.space_card:hover {
+  border-color: #5E48AD;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Space details */
+.space_details h3 {
+  font-size: 28px; /* bigger headline */
+  font-weight: 700;
+  color: #2C4949;
+  margin: 0 0 16px 0;
+}
+
+.space_details p {
+  font-size: 18px; /* larger paragraph text */
+  color: #2C4949;
+  margin: 8px 0;
+  line-height: 1.6; /* more readable spacing */
+}
+
+/* Action buttons at bottom of card */
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  justify-content: flex-end;
+}
+
+/* Individual buttons */
+.action-buttons button {
+  font-size: 18px; /* larger text */
+  padding: 12px 20px; /* bigger buttons */
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.action-buttons button:hover {
+  transform: translateY(-2px);
+}
+
+.btn-edit {
+  background: #5E48AD !important;
+  color: white;
+}
+.btn-edit:hover {
+  background: #4b3990;
+}
+
+.btn-reserve {
+  background: #5E48AD !important;
+  color: white;
+}
+.btn-reserve:hover {
+  background: #218838;
+}
+
+.btn-delete {
+  background: #cdd416 !important;
+  color: white;
+}
+.btn-delete:hover {
+  background: #a93226 !important;
+}
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+  .space_card, .back-button {
+    width: 100%;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+}
+
+/* Modal container */
+.modal-dialog {
+  max-width: 700px;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 3px solid transparent;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  font-family: 'Roboto', sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* Header */
+.modal-header {
+  background-color: rgba(214, 217, 87, 0.2); /* subtle lime tint */
+  border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  padding: 20px 28px;
+}
+
+.modal-title {
+  font-weight: 700;
+  font-size: 22px;
+  color: #2C4949;
+}
+
+/* Body */
+.modal-body {
+  padding: 28px;
+}
+
+.modal-body p {
+  margin-bottom: 16px;
+  color: #2C4949;
+  font-size: 16px;
+}
+
+/* Input fields */
+.modal-body input,
+.modal-body select,
+.modal-body textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  padding: 10px 14px;
+  font-size: 16px;
+  color: #2C4949;
+  background: #fdfdfd;
+  transition: border-color 0.3s;
+}
+
+.modal-body input:focus,
+.modal-body select:focus,
+.modal-body textarea:focus {
+  border-color: #5E48AD; /* purple border on focus */
+  outline: none;
+}
+
+/* Footer */
+.modal-footer {
+  border-top: none;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 28px 28px;
+}
+
+/* Buttons */
+.modal-footer .btn {
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.modal-footer .btn-secondary {
+  background-color: #D6D957; /* lime green */
+  color: #2C4949;
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: #c1c54e;
+}
+
+.modal-footer .btn-primary {
+  background-color: #5E48AD; /* purple */
+  color: white;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #4b3990;
+}
+
+/* Smooth animation on modal open */
+.modal.fade .modal-dialog {
+  transform: translateY(-20px);
+  transition: transform 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+  transform: translateY(0);
+}
+
+.styled-modal .modal-content {
+  border-radius: 18px;
+  border: 3px solid #5E48AD;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px;
+}
+
+.styled-modal .modal-header {
+  background-color: #f3f1fa;
+  border-bottom: 2px solid #5E48AD;
+  color: #2C4949;
+}
+
+.styled-modal .btn-primary {
+  background-color: #cdd416;
+  color: #2C4949;
+  font-weight: 600;
+  border: none;
+}
+
+.styled-modal .btn-primary:hover {
+  background-color: #c1c54e;
+}
+
+/* Calendar - full width edge-to-edge */
+#calendar-container {
+  width: 100vw;                 /* full viewport width */
+  max-width: 100%;
+  margin: 1.5rem 0;
+  padding: 0;                   /* no side padding so it can go edge-to-edge */
+  box-sizing: border-box;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;           /* trick to let it go full-bleed while staying in page flow */
+  margin-right: -50vw;
+  background: transparent;
+}
+
+/* visual wrapper inside full-bleed so calendar doesn't touch the window edges too tightly */
+#calendar {
+  width: calc(100% - 40px);
+  margin: 10px 20px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  overflow: hidden; 
+}
+
+/* make sure FullCalendar internal containers can stretch */
+.fc {
+  width: 100% !important;
+}
+
+/* small niceties */
+.fc .fc-toolbar-title { color: #2C4949; font-weight: 600; }
+.fc .fc-col-header-cell-cushion { color: #2C4949; font-weight: 600; }
+.fc .fc-timegrid-slot-label { color: #666; }
+
+/* Floorplan image kept centered below */
+.floorplan-container { text-align: center; margin-top: 2rem; }
+.floorplan-image { max-width: 80%; height: auto; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: 60px repeat(7, 1fr);
+  background: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  font-weight: bold;
+}
+
+.day-header {
+  padding: 8px;
+  border-left: 1px solid #ddd;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: 60px repeat(7, 1fr);
+  position: relative;
+}
+
+.calendar-row {
+  display: contents;
+}
+
+.time-col {
+  padding: 4px;
+  text-align: right;
+  font-size: 0.8em;
+  border-bottom: 1px solid #eee;
+}
+
+.calendar-cell {
+  border-left: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  height: 60px;
+  position: relative;
+}
+
+.reservation-block {
+  position: absolute;
+  background: #7dd3fc;
+  border: 1px solid #0284c7;
+  color: #000;
+  border-radius: 5px;
+  padding: 4px;
+  font-size: 0.8em;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.floorplan-container {
+  text-align: center;
+}
+
+.floorplan-image {
+  max-width: 80%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  margin-top: 15px;
+}
+
+.modal-body #id_location_choices {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;               /* space between checkbox and text */
+  margin-bottom: 8px; 
+  color: black ;
+}
+

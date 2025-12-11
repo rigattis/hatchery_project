@@ -1,0 +1,66 @@
+/* Spaces Home: List View */
+.space_container {
+  display: flex;
+  align-items: center; /* vertically center content */
+  justify-content: space-between; /* space between text and button */
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 18px;
+  border: 3px solid transparent; /* for hover/active effect */
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 12px;
+  margin: 0;     /* remove default spacing */
+  padding: 16px 24px;
+  transition: border 0.3s ease, background 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+}
+
+.space_container:hover {
+  border-color: #5E48AD; /* purple outline on hover */
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Text section */
+.space_details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 8px 12px;
+}
+
+.space_details h3 {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #1F3B3B !important;
+  margin-bottom: 4px !important;
+}
+
+.space_details h4 {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: #3E6B6B !important;
+  margin-bottom: 3px !important;
+}
+
+.space_details p {
+  font-size: 13px !important;
+  color: #455A5A !important;
+}
+
+
+/* View button */
+.space_container .btn {
+  background: #cdd416; /* lime green */
+  color: #2C4949;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 8px 16px;
+  margin: 0;     /* remove default spacing */
+  padding: 16px 24px;
+  transition: background 0.3s;
+}
+
+.space_container .btn:hover {
+  background: #c1c54e;
+}
