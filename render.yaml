@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: hatchery
+    runtime: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: >
+      cd hatchery &&\
+      python manage.py add_contacts &&
+      python manage.py add_events &&
+      python manage.py add_machines &&
+      python manage.py add_projects &&
+      python manage.py add_schedule &&
+      python manage.py add_spaces &&
+      python manage.py add_trainers &&
+      gunicorn config.asgi:application -k uvicorn.workers.UvicornWorker
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0

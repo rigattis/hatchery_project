@@ -1,0 +1,10 @@
+asgiref==3.10.0
+Django==5.2.7
+sqlparse==0.5.3
+django-allauth==0.58.2
+Pillow>=10.0.0
+dj-database-url
+gunicorn
+uvicorn[standard]
+whitenoise
+psycopg2-binary
