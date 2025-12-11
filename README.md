@@ -27,7 +27,7 @@ or
 6. run the app locally: python manage.py runserver
 7. navigate to the app on localhost
 
-  Diagrams and Navigation
+# Diagrams and Navigation
 
   UML Class Diagram:
 
