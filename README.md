@@ -26,7 +26,7 @@ or
 - python manage.py add_spaces
 - python manage.py add_trainers
 9. run the app locally: python manage.py runserver
-10. navigate to the app on localhost
+10. navigate to the locally hosted app on browser at: http://127.0.0.1:8000/
 
 # Diagrams and Navigation
 
