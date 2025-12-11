@@ -27,9 +27,13 @@ or
 6. run the app locally: python manage.py runserver
 7. navigate to the app on localhost
 
+  Diagrams and Navigation
 
-UML Class Diagram:
+  UML Class Diagram:
+
+
 <img width="827" height="612" alt="Screenshot 2025-12-11 at 1 59 36 PM" src="https://github.com/user-attachments/assets/f7b94ac2-0b1b-4125-8a60-a009a4d7fa8e" />
+
 
 Interaction Overview Diagram:
 <img width="968" height="820" alt="Screenshot 2025-12-11 at 1 59 51 PM" src="https://github.com/user-attachments/assets/79c1ae02-5066-4371-9473-33af42490b3d" />
